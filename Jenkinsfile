@@ -3,9 +3,9 @@ node('master') {
         cleanWS()
         git([url:'https://github.com/aamir85284/python-jenkins-pipeline', branch:'add-functions-and-test'])
     }
-    
- 
-        stage("Testing") {
+    dir('.'){
+            printMessage('Running Pipeline')
+          stage("Testing") {
             bat 'python test_functions.py'
         }
         stage("Deployment") {
@@ -14,7 +14,7 @@ node('master') {
             } else {
                 printMessage("No deployment for branch [${env.BRANCH_NAME}]")
             }
-            
+        }
         }
         printMessage('Pipeline Complete')
     
